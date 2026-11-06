@@ -14,6 +14,5 @@ def health():
 def users():
     name = request.args.get("name", "")
     conn = sqlite3.connect("app.db")
-    query = "SELECT id, name FROM users WHERE name = '" + name + "'"
-    rows = conn.execute(query).fetchall()
+    rows = conn.execute("SELECT id, name FROM users WHERE name = ?", (name,)).fetchall()
     return {"users": rows}
